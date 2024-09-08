@@ -3,10 +3,11 @@ name: Salesforce Document Record Creation
 on:
   push:
     paths:
-      - '**.docx'
-      - '**.md'
-      - '**.txt'
-      - '**.mp4'
+      - "**.docx"
+      - "**.md"
+      - "**.txt"
+      - "**.mp4"
+      - "*"
 
 jobs:
   create_salesforce_record:
@@ -18,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: "14"
 
       - name: Install dependencies
         run: npm install axios @salesforce/core
@@ -35,4 +36,3 @@ jobs:
           SF_INSTANCE_URL: ${{ secrets.SF_INSTANCE_URL }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
-
