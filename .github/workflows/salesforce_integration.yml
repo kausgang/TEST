@@ -1,13 +1,15 @@
 name: Salesforce Document Record Creation
 
-on:
-  push:
-    paths:
-      - "**.docx"
-      - "**.md"
-      - "**.txt"
-      - "**.mp4"
-      - "*"
+on: [push]
+
+# on:
+#   push:
+#     paths:
+#       - "**.docx"
+#       - "**.md"
+#       - "**.txt"
+#       - "**.mp4"
+#       - "*"
 
 jobs:
   create_salesforce_record:

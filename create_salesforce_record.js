@@ -47,12 +47,12 @@ async function main() {
 
   console.log("token =", accessToken);
 
+  console.log("exec output = ", execSync("node -v").toString());
+
   // Get the list of files in the latest commit
   const output = execSync(
     "git diff-tree --no-commit-id --name-only -r ${{ github.sha }}"
   );
-
-  console.log("output = ", output);
 
   const files = output
     .toString()
