@@ -45,12 +45,15 @@ async function createSalesforceRecord(accessToken, fileName, filePath) {
 async function main() {
   const accessToken = await getSalesforceAccessToken();
 
-  console.log(accessToken);
+  console.log("token =", accessToken);
 
   // Get the list of files in the latest commit
   const output = execSync(
     "git diff-tree --no-commit-id --name-only -r ${{ github.sha }}"
   );
+
+  console.log("output = ", output);
+
   const files = output
     .toString()
     .split("\n")
