@@ -49,7 +49,7 @@ async function main() {
 
   console.log("exec output = ", execSync("node -v").toString());
 
-  console.log("sha output - ", `${{ GITHUB_SHA }}`);
+  // console.log("sha output - ", `${{ GITHUB_SHA }}`);
 
   // Get the list of files in the latest commit
   const output = execSync(
