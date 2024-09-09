@@ -67,6 +67,8 @@ async function main() {
 
   console.log("files = ", files);
 
+  await createSalesforceRecord(accessToken, "", "");
+
   for (const file of files) {
     const fileName = file.split("/").pop();
     const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
