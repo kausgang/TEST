@@ -57,6 +57,6 @@ jobs:
           SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
           SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
           SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
-          SF_INSTANCE_URL: ${{ secrets.SF_INSTANCE_URL }}
+          SF_DOMAIN: ${{ secrets.SF_DOMAIN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}

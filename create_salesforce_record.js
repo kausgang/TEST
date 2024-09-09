@@ -31,7 +31,7 @@ async function createSalesforceRecord(accessToken, fileName, filePath) {
     console.log("here now");
 
     await axios.post(
-      `${process.env.SF_INSTANCE_URL}/services/data/v56.0/sobjects/techdoc__c`,
+      `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
       record,
       {
         headers: {
