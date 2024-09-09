@@ -21,8 +21,8 @@ async function getSalesforceAccessToken() {
 
 async function createSalesforceRecord(accessToken, fileName, filePath) {
   const record = {
-    Document_Name__c: "abc.md",
-    Document_Path__c: "/techdoc/q & a",
+    name__c: "abc.md",
+    path__c: "/techdoc/q & a",
     // Document_Name__c: fileName,
     // Document_Path__c: filePath,
   };
