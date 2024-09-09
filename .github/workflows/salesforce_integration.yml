@@ -23,7 +23,7 @@ jobs:
       - name: show latest files
         env:
           COMMIT_SHA: ${{ github.sha }}
-        run: node create_salesforce_record.js
+        run: node latest_file.js
 # on:
 #   push:
 #     paths:
