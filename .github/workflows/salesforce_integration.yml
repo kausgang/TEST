@@ -20,6 +20,10 @@ jobs:
           # List the files changed in the latest commit
           git diff-tree --no-commit-id --name-only -r "$COMMIT_SHA"
 
+      - name: show latest files
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+        run: node create_salesforce_record.js
 # on:
 #   push:
 #     paths:
