@@ -2,6 +2,24 @@ name: Salesforce Document Record Creation
 
 on: [push]
 
+jobs:
+  list_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: List changed files
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          # Print the commit SHA for debugging
+          echo "Commit SHA: $COMMIT_SHA"
+
+          # List the files changed in the latest commit
+          git diff-tree --no-commit-id --name-only -r "$COMMIT_SHA"
+
 # on:
 #   push:
 #     paths:
@@ -11,30 +29,30 @@ on: [push]
 #       - "**.mp4"
 #       - "*"
 
-jobs:
-  create_salesforce_record:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository content
-        uses: actions/checkout@v3
+# jobs:
+#   create_salesforce_record:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository content
+#         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "14"
 
-      - name: Install dependencies
-        run: npm install axios @salesforce/core
+#       - name: Install dependencies
+#         run: npm install axios @salesforce/core
 
-      - name: Create Salesforce records
-        run: node create_salesforce_record.js
-        env:
-          SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
-          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
-          SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
-          SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
-          SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
-          SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
-          SF_INSTANCE_URL: ${{ secrets.SF_INSTANCE_URL }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_SHA: ${{ github.sha }}
+#       - name: Create Salesforce records
+#         run: node create_salesforce_record.js
+#         env:
+#           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+#           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+#           SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
+#           SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
+#           SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
+#           SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
+#           SF_INSTANCE_URL: ${{ secrets.SF_INSTANCE_URL }}
+#           GITHUB_REPOSITORY: ${{ github.repository }}
+#           GITHUB_SHA: ${{ github.sha }}
