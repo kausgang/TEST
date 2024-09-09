@@ -54,10 +54,9 @@ async function main() {
     "git diff-tree --no-commit-id --name-only -r ${{ github.sha }}"
   );
 
-  const files = output
-    .toString()
-    .split("\n")
-    .filter((file) => file);
+  const files = output.toString();
+  // .split("\n")
+  // .filter((file) => file);
 
   for (const file of files) {
     const fileName = file.split("/").pop();
