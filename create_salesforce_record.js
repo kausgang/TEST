@@ -57,7 +57,7 @@ async function main() {
 
   // Get the list of files in the latest commit
   const output = execSync(
-    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA} , { encoding: 'buffer' }`
+    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
   );
 
   const files = output
