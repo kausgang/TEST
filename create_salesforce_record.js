@@ -47,9 +47,9 @@ async function createSalesforceRecord(accessToken, fileName, filePath) {
 }
 
 async function main() {
-  const accessToken = await getSalesforceAccessToken();
+  // const accessToken = await getSalesforceAccessToken();
 
-  console.log("token =", accessToken);
+  // console.log("token =", accessToken);
 
   console.log("exec output = ", execSync("node -v").toString());
 
@@ -57,7 +57,8 @@ async function main() {
 
   // Get the list of files in the latest commit
   const output = execSync(
-    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
+    `git diff-tree --no-commit-id --name-only -r @{push}`
+    // `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
   );
 
   const files = output
@@ -67,13 +68,13 @@ async function main() {
 
   console.log("files = ", output.toString("utf-8"));
 
-  await createSalesforceRecord(accessToken, "", "");
+  // await createSalesforceRecord(accessToken, "", "");
 
-  for (const file of files) {
-    const fileName = file.split("/").pop();
-    const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
-    await createSalesforceRecord(accessToken, fileName, filePath);
-  }
+  // for (const file of files) {
+  //   const fileName = file.split("/").pop();
+  //   const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
+  //   await createSalesforceRecord(accessToken, fileName, filePath);
+  // }
 }
 
 main().catch((error) => {
