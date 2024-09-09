@@ -3,7 +3,7 @@ const axios = require("axios");
 // Repository details and commit SHA
 const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
 const REPO_NAME = "test"; // Replace with your GitHub repository name
-const COMMIT_SHA = "0e0fa15c7c45e52ac87896d16e907eeb4713a4d7";
+const COMMIT_SHA = "6ef2482f79976566ef99fccc8199ff77e2b869ae";
 
 // Function to get changed files in a commit
 async function getChangedFiles(commitSha) {
