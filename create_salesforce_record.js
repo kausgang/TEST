@@ -57,15 +57,15 @@ async function main() {
 
   // Get the list of files in the latest commit
   const output = execSync(
-    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
+    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA} , { encoding: 'buffer' }`
   );
 
   const files = output
-    .toString()
+    .toString("utf-8")
     .split("\n")
     .filter((file) => file);
 
-  console.log("files = ", output.toString());
+  console.log("files = ", output.toString("utf-8"));
 
   await createSalesforceRecord(accessToken, "", "");
 
