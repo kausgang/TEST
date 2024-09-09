@@ -68,10 +68,7 @@ async function main() {
 
   console.log(
     "files = ",
-    execSync(
-      "git diff-tree --no-commit-id --name-only -r @{push}"
-      // `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
-    ).toString()
+    execSync("git diff-tree --no-commit-id --name-only -r @{push}")
   );
 
   // await createSalesforceRecord(accessToken, "", "");
