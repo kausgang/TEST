@@ -51,21 +51,21 @@ async function main() {
 
   console.log("sha output - ", `${{ GITHUB_SHA }}`);
 
-  // // Get the list of files in the latest commit
-  // const output = execSync(
-  //   "git diff-tree --no-commit-id --name-only -r ${{ github.sha }}"
-  // );
+  // Get the list of files in the latest commit
+  const output = execSync(
+    `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
+  );
 
-  // const files = output
-  //   .toString()
-  //   .split("\n")
-  //   .filter((file) => file);
+  const files = output
+    .toString()
+    .split("\n")
+    .filter((file) => file);
 
-  // for (const file of files) {
-  //   const fileName = file.split("/").pop();
-  //   const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
-  //   await createSalesforceRecord(accessToken, fileName, filePath);
-  // }
+  for (const file of files) {
+    const fileName = file.split("/").pop();
+    const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
+    await createSalesforceRecord(accessToken, fileName, filePath);
+  }
 }
 
 main().catch((error) => {

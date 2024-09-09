@@ -1,1 +1,1 @@
-console.log(`${{ COMMIT_SHA }}`);
+console.log(process.env.COMMIT_SHA);
