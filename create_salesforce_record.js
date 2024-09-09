@@ -61,6 +61,8 @@ async function main() {
     .split("\n")
     .filter((file) => file);
 
+  console.log(files);
+
   for (const file of files) {
     const fileName = file.split("/").pop();
     const filePath = `${process.env.GITHUB_REPOSITORY}/blob/${process.env.GITHUB_SHA}/${file}`;
