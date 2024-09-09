@@ -53,7 +53,7 @@ async function main() {
 
   console.log("exec output = ", execSync("node -v").toString());
 
-  // console.log("sha output - ", `${{ GITHUB_SHA }}`);
+  console.log("sha output - ", `${process.env.GITHUB_SHA}`);
 
   // Get the list of files in the latest commit
   const output = execSync(
@@ -66,7 +66,7 @@ async function main() {
     .split("\n")
     .filter((file) => file);
 
-  console.log("files = ", output.toString("utf-8"));
+  console.log("files = ", output.toString());
 
   // await createSalesforceRecord(accessToken, "", "");
 
