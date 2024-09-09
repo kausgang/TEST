@@ -28,6 +28,8 @@ async function createSalesforceRecord(accessToken, fileName, filePath) {
   };
 
   try {
+    console.log("here now");
+
     await axios.post(
       `${process.env.SF_INSTANCE_URL}/services/data/v56.0/sobjects/techdoc__c`,
       record,
@@ -63,7 +65,7 @@ async function main() {
     .split("\n")
     .filter((file) => file);
 
-  console.log(files);
+  console.log("files = ", files);
 
   for (const file of files) {
     const fileName = file.split("/").pop();
