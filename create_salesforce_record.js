@@ -66,7 +66,13 @@ async function main() {
     .split("\n")
     .filter((file) => file);
 
-  console.log("files = ", output.toString());
+  console.log(
+    "files = ",
+    execSync(
+      "git diff-tree --no-commit-id --name-only -r @{push}"
+      // `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
+    ).toString()
+  );
 
   // await createSalesforceRecord(accessToken, "", "");
 
