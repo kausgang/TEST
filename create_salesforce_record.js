@@ -68,7 +68,9 @@ async function main() {
 
   console.log(
     "files = ",
-    execSync("git diff-tree --no-commit-id --name-only -r @{push}")
+    execSync("git diff-tree --no-commit-id --name-only -r @{push}").toString(
+      "utf-8"
+    )
   );
 
   // await createSalesforceRecord(accessToken, "", "");
