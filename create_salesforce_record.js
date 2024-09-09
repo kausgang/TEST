@@ -65,7 +65,7 @@ async function main() {
     .split("\n")
     .filter((file) => file);
 
-  console.log("files = ", output);
+  console.log("files = ", output.toString());
 
   await createSalesforceRecord(accessToken, "", "");
 
