@@ -61,17 +61,26 @@ async function main() {
     // `git diff-tree --no-commit-id --name-only -r ${process.env.GITHUB_SHA}`
   );
 
-  const files = output
-    .toString("utf-8")
-    .split("\n")
-    .filter((file) => file);
+  // const files = output
+  //   .toString("utf-8")
+  //   .split("\n")
+  //   .filter((file) => file);
 
-  console.log(
-    "files = ",
-    execSync("git diff-tree --no-commit-id --name-only -r @{push}").toString(
-      "utf16le"
-    )
-  );
+  // console.log(
+  //   "files = ",
+  //   execSync("git diff-tree --no-commit-id --name-only -r @{push}").toString(
+  //     "utf16le"
+  //   )
+  // );
+
+  const command = execSync(output, { encoding: "'utf-8'" });
+  console.log("Raw output buffer:", command);
+
+  const outputString = command.toString("utf-8");
+  console.log("Output as string:", outputString);
+
+  const files = outputString.split("\n").filter((file) => file);
+  console.log("Changed files:", files);
 
   // await createSalesforceRecord(accessToken, "", "");
 
