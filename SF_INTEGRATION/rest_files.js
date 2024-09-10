@@ -117,7 +117,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
       // },
     });
 
-    const SF_ID = response.data.recentItems[0].id;
+    const SF_ID = response.data.recentItems[0].Id;
     console.log("SF_ID=", SF_ID);
   } catch (error) {
     console.log("couldnot get sf record");
