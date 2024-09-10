@@ -6,7 +6,8 @@ import createRecord from "./createRecord";
 const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
 const REPO_NAME = "test"; // Replace with your GitHub repository name
 const COMMIT_SHA = process.env.GITHUB_SHA;
-GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const SF_OBJECT = "testdoc__c";
 
 // Function to get changed files in a commit
 async function getChangedFiles(commitSha) {
@@ -53,6 +54,35 @@ async function getSalesforceAccessToken() {
   }
 }
 
+async function newSFRecord(accessToken, filename) {
+  // separate the filename and path
+  let only_filename = filename.substring(
+    filename.length,
+    filename.lastIndexOf("/") + 1
+  );
+
+  const record = {
+    name__c: only_filename,
+    path__c: filename,
+  };
+
+  try {
+    await axios.post(
+      `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
+      record,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(`Record created for ${filename}`);
+  } catch (error) {
+    console.error(`Error creating Salesforce record for ${filename}:`, error);
+  }
+}
+
 async function createSalesforceRecord(accessToken, file, filePath) {
   const { filename, status } = file;
 
@@ -66,37 +96,39 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   // ]
 
   //   IF NEW FILE ADDED
-  createRecord(accessToken, filename, status);
-  // if (status === "added") {
-  //   // separate the filename and path
-  //   let only_filename = filename.substring(
-  //     filename.length,
-  //     filename.lastIndexOf("/") + 1
-  //   );
 
-  //   const record = {
-  //     name__c: only_filename,
-  //     path__c: filename,
-  //   };
+  if (status === "added") {
+    await newSFRecord(accessToken, filename);
+    // // separate the filename and path
+    // let only_filename = filename.substring(
+    //   filename.length,
+    //   filename.lastIndexOf("/") + 1
+    // );
 
-  //   try {
-  //     await axios.post(
-  //       `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
-  //       record,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     console.log(`Record created for ${file}`);
-  //   } catch (error) {
-  //     console.error(`Error creating Salesforce record for ${file}:`, error);
-  //   }
-  // }
+    // const record = {
+    //   name__c: only_filename,
+    //   path__c: filename,
+    // };
+
+    // try {
+    //   await axios.post(
+    //     `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
+    //     record,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   console.log(`Record created for ${filename}`);
+    // } catch (error) {
+    //   console.error(`Error creating Salesforce record for ${filename}:`, error);
+    // }
+  }
 }
 
+// define the main function
 const main = async () => {
   // get the updated files
   const files = await getChangedFiles(COMMIT_SHA);
@@ -110,9 +142,10 @@ const main = async () => {
     async (file) => await createSalesforceRecord(accessToken, file, "")
   );
 
-  console.log(files);
+  // console.log(files);
 };
 
+// call the main function
 main().catch((error) => {
   console.error("Error in Salesforce integration:", error);
   process.exit(1);
