@@ -82,9 +82,31 @@ async function newSFRecord(accessToken, filename) {
   }
 }
 
-async function createSalesforceRecord(accessToken, file, filePath) {
-  const { filename, status } = file;
+async function renameSFRecord(accessToken, filename) {
+  // separate the filename and path
+  let only_filename = filename.substring(
+    filename.length,
+    filename.lastIndexOf("/") + 1
+  );
 
+  // find if this filename exists in salesforce
+  const soql = `select id from techdoc__c where name__c=${only_filename} limit 1`;
+  const response = await axios({
+    url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "Application/JSON",
+    },
+    params: {
+      q: soql,
+    },
+  });
+
+  console.log(response.records);
+}
+
+async function createSalesforceRecord(accessToken, file, filePath) {
   // if added or renamed, create salesforce record
   //   if modified or removed status - delete the record
   // [
@@ -94,36 +116,16 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   //     { filename: 'test/12.md', status: 'renamed' }
   // ]
 
+  const { filename, status } = file;
+
   //   IF NEW FILE ADDED
 
   if (status === "added") {
     await newSFRecord(accessToken, filename);
-    // // separate the filename and path
-    // let only_filename = filename.substring(
-    //   filename.length,
-    //   filename.lastIndexOf("/") + 1
-    // );
+  }
 
-    // const record = {
-    //   name__c: only_filename,
-    //   path__c: filename,
-    // };
-
-    // try {
-    //   await axios.post(
-    //     `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
-    //     record,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   console.log(`Record created for ${filename}`);
-    // } catch (error) {
-    //   console.error(`Error creating Salesforce record for ${filename}:`, error);
-    // }
+  if (status === "renamed") {
+    await renameSFRecord(accessToken, filename);
   }
 }
 
