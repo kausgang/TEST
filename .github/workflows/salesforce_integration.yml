@@ -51,13 +51,16 @@ jobs:
       - name: Create Salesforce records
         run: node SF_INTEGRATION/rest_files.js
         env:
+          SF_DOMAIN: "test-18d-dev-ed.develop.my.salesforce.com"
+          SF_TOKEN_URL: "https://$SF_DOMAIN/services/oauth2/token"
           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
-          SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
-          SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
-          SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
-          SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
-          SF_DOMAIN: ${{ secrets.SF_DOMAIN }}
+          # SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
+          # SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
+          # SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
+          # SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
+          # SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
+          # SF_DOMAIN: ${{ secrets.SF_DOMAIN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
