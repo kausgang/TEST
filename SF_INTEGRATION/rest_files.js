@@ -127,7 +127,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
   try {
     const response = await axios({
       url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}/${SF_ID}`,
-      method: "PATCH",
+      method: "PUT",
       data: {
         name__c: "rest new name",
         path__c: filename,
