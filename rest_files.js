@@ -85,8 +85,8 @@ const main = async () => {
   // get the updated files
   const files = await getChangedFiles(COMMIT_SHA);
 
-  //   //   get access token
-  //   const accessToken = await getSalesforceAccessToken();
+  //   get access token
+  const accessToken = await getSalesforceAccessToken();
 
   //   console.log(accessToken);
 
