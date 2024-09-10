@@ -123,7 +123,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
     // rename the salesforce record
     const rename_response = await axios({
       url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}/${SF_ID}`,
-      method: "PUT",
+      method: "PATCH",
       data: {
         name__c: "rest new name",
         path__c: filename,
