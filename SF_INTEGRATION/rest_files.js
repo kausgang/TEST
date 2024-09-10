@@ -25,6 +25,7 @@ async function getChangedFiles(commitSha) {
       return {
         filename: file.filename,
         status: file.status,
+        previous_filename: file.previous_filename,
       };
     });
     // const files = response.data.files.map((file) => file.filename);
@@ -82,15 +83,20 @@ async function newSFRecord(accessToken, filename) {
   }
 }
 
-async function renameSFRecord(accessToken, filename) {
+async function renameSFRecord(accessToken, filename, previous_filename) {
   // separate the filename and path
   let only_filename = filename.substring(
     filename.length,
     filename.lastIndexOf("/") + 1
   );
 
+  let only_previous_filename = previous_filename.substring(
+    previous_filename.length,
+    previous_filename.lastIndexOf("/") + 1
+  );
+
   // find if this filename exists in salesforce
-  const soql = `select id from techdoc__c where name__c=${only_filename} limit 1`;
+  const soql = `select id from techdoc__c where name__c=${only_previous_filename} limit 1`;
   const response = await axios({
     url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
     method: "GET",
@@ -116,7 +122,7 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   //     { filename: 'test/12.md', status: 'renamed' }
   // ]
 
-  const { filename, status } = file;
+  const { filename, status, previous_filename } = file;
 
   //   IF NEW FILE ADDED
 
@@ -125,7 +131,7 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   }
 
   if (status === "renamed") {
-    await renameSFRecord(accessToken, filename);
+    await renameSFRecord(accessToken, filename, previous_filename);
   }
 }
 
