@@ -119,13 +119,9 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
 
     const SF_ID = response.data.recentItems[0].Id;
     console.log("SF_ID=", SF_ID);
-  } catch (error) {
-    console.log("couldnot get sf record");
-  }
 
-  // rename the salesforce record
-  try {
-    const response = await axios({
+    // rename the salesforce record
+    const rename_response = await axios({
       url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}/${SF_ID}`,
       method: "PUT",
       data: {
@@ -138,9 +134,9 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
       },
     });
 
-    console.log(response.data);
+    console.log(rename_response.data);
   } catch (error) {
-    console.log(error);
+    console.log("couldnot get sf record");
   }
 
   // console.log("response = ", response.data);
