@@ -52,7 +52,7 @@ jobs:
         run: node SF_INTEGRATION/rest_files.js
         env:
           SF_DOMAIN: "test-18d-dev-ed.develop.my.salesforce.com"
-          SF_TOKEN_URL: "https://$SF_DOMAIN/services/oauth2/token"
+          SF_TOKEN_URL: "https://${SF_DOMAIN}/services/oauth2/token"
           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
           # SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
