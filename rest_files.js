@@ -84,9 +84,9 @@ async function createSalesforceRecord(accessToken, file, filePath) {
           },
         }
       );
-      console.log(`Record created for ${fileName}`);
+      console.log(`Record created for ${file}`);
     } catch (error) {
-      console.error(`Error creating Salesforce record for ${fileName}:`, error);
+      console.error(`Error creating Salesforce record for ${file}:`, error);
     }
   }
 }
