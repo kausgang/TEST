@@ -109,7 +109,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
     },
   });
 
-  console.log(response);
+  console.log(response.data);
 }
 
 async function createSalesforceRecord(accessToken, file, filePath) {
