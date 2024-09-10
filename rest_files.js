@@ -91,12 +91,12 @@ const main = async () => {
   //   get access token
   const accessToken = await getSalesforceAccessToken();
 
-  files.forEach(
-    (file) =>
-      async function () {
-        await createSalesforceRecord(accessToken, file, "");
-      }
+  console.log(accessToken);
+
+  files.map(
+    async (file) => await createSalesforceRecord(accessToken, file, "")
   );
+
   console.log(files);
 };
 
