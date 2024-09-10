@@ -49,7 +49,7 @@ jobs:
         run: npm install axios @salesforce/core
 
       - name: Create Salesforce records
-        run: node rest_files.js
+        run: node SF_INTEGRATION/rest_files.js
         env:
           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}

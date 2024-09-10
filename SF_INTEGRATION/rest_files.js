@@ -63,7 +63,8 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   //     { filename: 'test/12.md', status: 'renamed' }
   // ]
 
-  if (status === "added" || status === "renamed") {
+  //   IF NEW FILE ADDED
+  if (status === "added") {
     // separate the filename and path
     let only_filename = filename.substring(
       filename.length,
