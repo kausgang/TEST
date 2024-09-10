@@ -95,6 +95,8 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
     previous_filename.lastIndexOf("/") + 1
   );
 
+  console.log(only_previous_filename);
+
   try {
     // find if this filename exists in salesforce
     const soql = `select id from techdoc__c where name__c='${only_previous_filename}' limit 1`;
