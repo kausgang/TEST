@@ -125,7 +125,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
       url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}/${SF_ID}`,
       method: "PATCH",
       data: {
-        name__c: "rest new name",
+        name__c: only_filename,
         path__c: filename,
       },
       headers: {
