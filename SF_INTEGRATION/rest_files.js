@@ -1,6 +1,6 @@
 // const axios = require("axios");
 import axios from "axios";
-import { createRecord } from "SF_INTEGRATION/createRecord";
+import createRecord from "./createRecord";
 
 // Repository details and commit SHA
 const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
