@@ -99,17 +99,22 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
 
   try {
     // find if this filename exists in salesforce
+    // const soql = `select id from techdoc__c where name__c='${only_previous_filename}' limit 1`;
     const soql = `select id from techdoc__c where name__c='${only_previous_filename}' limit 1`;
     const response = await axios({
-      url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
+      url: `${
+        process.env.SF_DOMAIN
+      }/services/data/v61.0/sobjects/${SF_OBJECT}?q=${encodeURIComponent(
+        soql
+      )}`,
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "Application/JSON",
       },
-      params: {
-        q: soql,
-      },
+      // params: {
+      //   q: soql,
+      // },
     });
 
     const SF_ID = response.data.recentItems[0].id;
