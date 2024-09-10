@@ -137,6 +137,8 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
         "Content-Type": "application/json",
       },
     });
+
+    console.log(response.data);
   } catch (error) {
     // console.log(error);
   }
