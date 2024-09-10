@@ -140,7 +140,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
 
     console.log(response.data);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 
   // console.log("response = ", response.data);
@@ -177,7 +177,7 @@ const main = async () => {
   //   get access token
   const accessToken = await getSalesforceAccessToken();
 
-  //   console.log(accessToken);
+  console.log(accessToken);
 
   files.map(
     async (file) => await createSalesforceRecord(accessToken, file, "")
