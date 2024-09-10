@@ -54,14 +54,16 @@ async function getSalesforceAccessToken() {
 async function createSalesforceRecord(accessToken, file, filePath) {
   const { filename, status } = file;
 
-  // if modified or removed status - don't do anything
+  // if added or renamed, create salesforce record
+  //   if modified or removed status - delete the record
   // [
   //     { filename: 'rest_files.js', status: 'modified' },
   //     { filename: 'test/a.docx', status: 'added' },
   //     { filename: 'test/a.docx', status: 'removed' }
+  //     { filename: 'test/12.md', status: 'renamed' }
   // ]
 
-  if (status === "added") {
+  if (status === "added" || status === "renamed") {
     // separate the filename and path
     let only_filename = filename.substring(
       filename.length,
