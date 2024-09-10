@@ -2,15 +2,15 @@ const axios = require("axios");
 
 // Repository details and commit SHA
 const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
-const REPO_NAME = "TechLearning"; // Replace with your GitHub repository name
-const COMMIT_SHA = "888d9c143752f76eaab9ade834a0b7b4661c976f";
-GITHUB_TOKEN = "";
+const REPO_NAME = "test"; // Replace with your GitHub repository name
+const COMMIT_SHA = process.env.GITHUB_SHA;
+GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 // Function to get changed files in a commit
 async function getChangedFiles(commitSha) {
   try {
     const response = await axios.get(
-      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${commitSha}`,
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${COMMIT_SHA}`,
       {
         headers: {
           Authorization: `token ${GITHUB_TOKEN}`,
