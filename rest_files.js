@@ -41,9 +41,6 @@ async function getSalesforceAccessToken() {
   params.append("grant_type", "client_credentials");
   params.append("client_id", process.env.SF_CLIENT_ID);
   params.append("client_secret", process.env.SF_CLIENT_SECRET);
-  // params.append('username', process.env.SF_USER_NAME);
-  // params.append('password', process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN);
-  // params.append('redirect_uri', process.env.SF_CALLBACK_URL);
 
   try {
     const response = await axios.post(process.env.SF_TOKEN_URL, params);
@@ -54,31 +51,44 @@ async function getSalesforceAccessToken() {
   }
 }
 
-async function createSalesforceRecord(accessToken, fileName, filePath) {
-  const { file, status } = fileName;
+async function createSalesforceRecord(accessToken, file, filePath) {
+  const { filename, status } = file;
 
-  console.log("file =", file, " status= ", status);
+  // if modified or removed status - don't do anything
+  // [
+  //     { filename: 'rest_files.js', status: 'modified' },
+  //     { filename: 'test/a.docx', status: 'added' },
+  //     { filename: 'test/a.docx', status: 'removed' }
+  // ]
 
-  const record = {
-    name__c: fileName,
-    path__c: "/techdoc/q & a",
-  };
+  if (status === "added") {
+    // separate the filename and path
+    let only_filename = filename.substring(
+      filename.length,
+      filename.lastIndexOf("/") + 1
+    );
 
-  //   try {
-  //     await axios.post(
-  //       `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
-  //       record,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     console.log(`Record created for ${fileName}`);
-  //   } catch (error) {
-  //     console.error(`Error creating Salesforce record for ${fileName}:`, error);
-  //   }
+    const record = {
+      name__c: only_filename,
+      path__c: filename,
+    };
+
+    try {
+      await axios.post(
+        `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
+        record,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(`Record created for ${fileName}`);
+    } catch (error) {
+      console.error(`Error creating Salesforce record for ${fileName}:`, error);
+    }
+  }
 }
 
 const main = async () => {
