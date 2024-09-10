@@ -109,7 +109,28 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
     },
   });
 
-  console.log(response.data);
+  const SF_ID = response.data.recentItems[0].id;
+  // console.log(response.data.recen);
+
+  // rename the salesforce record
+  try {
+    const response = await axios({
+      url: `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}/${SF_ID}`,
+      method: "PATCH",
+      data: {
+        name__c: "rest new name",
+        path__c: filename,
+      },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("response = ", response.data);
 }
 
 async function createSalesforceRecord(accessToken, file, filePath) {
