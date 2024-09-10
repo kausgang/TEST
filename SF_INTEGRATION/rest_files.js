@@ -2,8 +2,8 @@
 import axios from "axios";
 
 // Repository details and commit SHA
-const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
-const REPO_NAME = "test"; // Replace with your GitHub repository name
+const REPO_OWNER = process.env.OWNER; // Replace with your GitHub repository owner (username or organization)
+const REPO_NAME = process.env.REPO; // Replace with your GitHub repository name
 const COMMIT_SHA = process.env.GITHUB_SHA;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const SF_OBJECT = "techdoc__c";
@@ -68,7 +68,7 @@ async function newSFRecord(accessToken, filename) {
 
   try {
     await axios.post(
-      `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
+      `https://${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/${SF_OBJECT}`,
       record,
       {
         headers: {
@@ -161,6 +161,7 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   }
 
   if (status === "renamed") {
+    // count how many files
     await renameSFRecord(accessToken, filename, previous_filename);
   }
 }
