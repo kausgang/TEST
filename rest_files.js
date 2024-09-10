@@ -19,7 +19,13 @@ async function getChangedFiles(commitSha) {
       }
     );
 
-    const files = response.data.files.map((file) => file.filename);
+    const files = response.data.files.map((file) => {
+      return {
+        filename: file.filename,
+        status: file.status,
+      };
+    });
+    // const files = response.data.files.map((file) => file.filename);
     return files;
   } catch (error) {
     console.error(
@@ -29,17 +35,6 @@ async function getChangedFiles(commitSha) {
     throw error;
   }
 }
-
-// Execute the function and print the result
-// getChangedFiles(COMMIT_SHA)
-//   .then((files) => {
-//     console.log("Changed files:", files);
-
-//     // insert data into salesforce
-//   })
-//   .catch((error) => {
-//     console.error("Failed to get changed files:", error);
-//   });
 
 async function getSalesforceAccessToken() {
   const params = new URLSearchParams();
@@ -66,8 +61,6 @@ async function createSalesforceRecord(accessToken, fileName, filePath) {
   };
 
   try {
-    console.log("here now");
-
     await axios.post(
       `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
       record,
@@ -88,14 +81,14 @@ const main = async () => {
   // get the updated files
   const files = await getChangedFiles(COMMIT_SHA);
 
-  //   get access token
-  const accessToken = await getSalesforceAccessToken();
+  //   //   get access token
+  //   const accessToken = await getSalesforceAccessToken();
 
-  console.log(accessToken);
+  //   console.log(accessToken);
 
-  files.map(
-    async (file) => await createSalesforceRecord(accessToken, file, "")
-  );
+  //   files.map(
+  //     async (file) => await createSalesforceRecord(accessToken, file, "")
+  //   );
 
   console.log(files);
 };
