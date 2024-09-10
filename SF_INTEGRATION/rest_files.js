@@ -1,4 +1,6 @@
-const axios = require("axios");
+// const axios = require("axios");
+import axios from "axios";
+import { createRecord } from "./createRecord";
 
 // Repository details and commit SHA
 const REPO_OWNER = "kausgang"; // Replace with your GitHub repository owner (username or organization)
@@ -64,34 +66,35 @@ async function createSalesforceRecord(accessToken, file, filePath) {
   // ]
 
   //   IF NEW FILE ADDED
-  if (status === "added") {
-    // separate the filename and path
-    let only_filename = filename.substring(
-      filename.length,
-      filename.lastIndexOf("/") + 1
-    );
+  createRecord(accessToken, filename, status);
+  // if (status === "added") {
+  //   // separate the filename and path
+  //   let only_filename = filename.substring(
+  //     filename.length,
+  //     filename.lastIndexOf("/") + 1
+  //   );
 
-    const record = {
-      name__c: only_filename,
-      path__c: filename,
-    };
+  //   const record = {
+  //     name__c: only_filename,
+  //     path__c: filename,
+  //   };
 
-    try {
-      await axios.post(
-        `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
-        record,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(`Record created for ${file}`);
-    } catch (error) {
-      console.error(`Error creating Salesforce record for ${file}:`, error);
-    }
-  }
+  //   try {
+  //     await axios.post(
+  //       `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
+  //       record,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     console.log(`Record created for ${file}`);
+  //   } catch (error) {
+  //     console.error(`Error creating Salesforce record for ${file}:`, error);
+  //   }
+  // }
 }
 
 const main = async () => {
