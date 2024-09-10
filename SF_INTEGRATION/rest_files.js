@@ -110,7 +110,7 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
   });
 
   const SF_ID = response.data.recentItems[0].id;
-  // console.log(response.data.recen);
+  console.log("SF_ID=", SF_ID);
 
   // rename the salesforce record
   try {
@@ -127,10 +127,10 @@ async function renameSFRecord(accessToken, filename, previous_filename) {
       },
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 
-  console.log("response = ", response.data);
+  // console.log("response = ", response.data);
 }
 
 async function createSalesforceRecord(accessToken, file, filePath) {
