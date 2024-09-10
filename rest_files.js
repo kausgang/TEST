@@ -55,26 +55,30 @@ async function getSalesforceAccessToken() {
 }
 
 async function createSalesforceRecord(accessToken, fileName, filePath) {
+  const { file, status } = fileName;
+
+  console.log("file =", file, " status= ", status);
+
   const record = {
     name__c: fileName,
     path__c: "/techdoc/q & a",
   };
 
-  try {
-    await axios.post(
-      `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
-      record,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(`Record created for ${fileName}`);
-  } catch (error) {
-    console.error(`Error creating Salesforce record for ${fileName}:`, error);
-  }
+  //   try {
+  //     await axios.post(
+  //       `${process.env.SF_DOMAIN}/services/data/v61.0/sobjects/techdoc__c`,
+  //       record,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     console.log(`Record created for ${fileName}`);
+  //   } catch (error) {
+  //     console.error(`Error creating Salesforce record for ${fileName}:`, error);
+  //   }
 }
 
 const main = async () => {
@@ -86,9 +90,9 @@ const main = async () => {
 
   //   console.log(accessToken);
 
-  //   files.map(
-  //     async (file) => await createSalesforceRecord(accessToken, file, "")
-  //   );
+  files.map(
+    async (file) => await createSalesforceRecord(accessToken, file, "")
+  );
 
   console.log(files);
 };
