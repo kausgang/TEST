@@ -62,8 +62,8 @@ async function newSFRecord(accessToken, filename) {
   );
 
   const record = {
-    name__c: only_filename,
-    path__c: filename,
+    DocName__c: only_filename,
+    Location__c: filename,
   };
 
   try {
