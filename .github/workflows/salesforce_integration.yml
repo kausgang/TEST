@@ -53,7 +53,7 @@ jobs:
         env:
           SF_DOMAIN: "test-18d-dev-ed.develop.my.salesforce.com"
           SF_TOKEN_URL: "https://test-18d-dev-ed.develop.my.salesforce.com/services/oauth2/token"
-          SF_REPO: "test" # change it
+          SF_REPO: "test"
           SF_OWNER: "kausgang"
           SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
           SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
