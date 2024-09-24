@@ -65,7 +65,9 @@ async function newSFRecord(accessToken, filename) {
 
   const record = {
     Quesion_Number__c: only_filename,
-    Github_URL__c: filename,
+    Github_URL__c: encodeURI(
+      `https://github.com/kausgang/test/blob/SF-GH_PracticeTest/${filename}`
+    ),
   };
 
   try {
