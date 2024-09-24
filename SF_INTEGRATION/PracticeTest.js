@@ -1,5 +1,5 @@
-const axios = require("axios");
-// import axios from "axios";
+// const axios = require("axios");
+import axios from "axios";
 
 // Repository details and commit SHA
 const REPO_OWNER = process.env.OWNER; // Replace with your GitHub repository owner (username or organization)
