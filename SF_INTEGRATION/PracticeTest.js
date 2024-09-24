@@ -62,8 +62,8 @@ async function newSFRecord(accessToken, filename) {
   );
 
   const record = {
-    DocName__c: only_filename,
-    Location__c: filename,
+    Quesion_Number__c: only_filename,
+    Github_URL__c: filename,
   };
 
   try {
@@ -112,9 +112,9 @@ const main = async () => {
 
   console.log(accessToken);
 
-  // files.map(
-  //   async (file) => await createSalesforceRecord(accessToken, file, "")
-  // );
+  files.map(
+    async (file) => await createSalesforceRecord(accessToken, file, "")
+  );
 
   console.log(files);
 };

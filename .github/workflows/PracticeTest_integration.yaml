@@ -53,7 +53,7 @@ jobs:
       - name: Install dependencies
         run: npm install axios @salesforce/core
 
-      - name: Create Salesforce records
+      - name: PracticeTest Integration
         run: node SF_INTEGRATION/PracticeTest.js
         env:
           SF_DOMAIN: "test-18d-dev-ed.develop.my.salesforce.com"
