@@ -81,7 +81,10 @@ async function newSFRecord(accessToken, filename) {
     );
     console.log(`Record created for ${filename}`);
   } catch (error) {
-    console.error(`Error creating Salesforce record for ${filename}:`, error);
+    console.error(
+      `Error creating Salesforce record for ${filename}:`,
+      error.response.data
+    );
   }
 }
 
