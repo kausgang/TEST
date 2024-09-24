@@ -6,7 +6,7 @@ const REPO_OWNER = process.env.OWNER; // Replace with your GitHub repository own
 const REPO_NAME = process.env.REPO; // Replace with your GitHub repository name
 const COMMIT_SHA = process.env.GITHUB_SHA;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const SF_OBJECT = "techdoc__c";
+const SF_OBJECT = "PracticeTest__c";
 
 // Function to get changed files in a commit
 async function getChangedFiles(commitSha) {
