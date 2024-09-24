@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - SF-GH_PracticeTest
+    paths:
+      - "**.png"
 # jobs:
 #   list_files:
 #     runs-on: ubuntu-latest
