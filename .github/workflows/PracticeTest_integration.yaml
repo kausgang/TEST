@@ -1,0 +1,71 @@
+name: Salesforce Document Record Creation
+
+on:
+  push:
+    branches:
+      - SF-GH_PracticeTest
+# jobs:
+#   list_files:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: List changed files
+#         env:
+#           COMMIT_SHA: ${{ github.sha }}
+#         run: |
+#           # Print the commit SHA for debugging
+#           echo "Commit SHA: $COMMIT_SHA"
+
+#           # List the files changed in the latest commit
+#           git diff-tree --no-commit-id --name-only -r "$COMMIT_SHA"
+
+#       - name: show latest files
+#         env:
+#           COMMIT_SHA: ${{ github.sha }}
+#         run: node latest_file.js
+
+# on:
+#   push:
+#     paths:
+#       - "**.docx"
+#       - "**.md"
+#       - "**.txt"
+#       - "**.mp4"
+#       - "*"
+
+jobs:
+  create_salesforce_record:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install axios @salesforce/core
+
+      - name: Create Salesforce records
+        run: node SF_INTEGRATION/PracticeTest.js
+        env:
+          SF_DOMAIN: "test-18d-dev-ed.develop.my.salesforce.com"
+          SF_TOKEN_URL: "https://test-18d-dev-ed.develop.my.salesforce.com/services/oauth2/token"
+          REPO: "test"
+          OWNER: "kausgang"
+          SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+          SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+          # SF_USER_NAME: ${{ secrets.SF_USER_NAME }}
+          # SF_CALLBACK_URL: ${{ secrets.SF_CALLBACK_URL }}
+          # SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
+          # SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
+          # SF_TOKEN_URL: ${{ secrets.SF_TOKEN_URL }}
+          # SF_DOMAIN: ${{ secrets.SF_DOMAIN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
