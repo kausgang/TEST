@@ -31,11 +31,13 @@ async function getChangedFiles(commitSha) {
     // const files = response.data.files.map((file) => file.filename);
     return files;
   } catch (error) {
-    console.error(
-      "Error fetching commit details:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
+    // console.error(
+    //   "Error fetching commit details:",
+    //   error.response ? error.response.data : error.message
+    // );
+    // throw error;
+
+    console.error(error.response.data);
   }
 }
 
