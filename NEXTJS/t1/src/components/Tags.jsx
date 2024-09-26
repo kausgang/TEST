@@ -8,6 +8,8 @@ const Tags = () => {
 
   // const handleClose = (test) => removeTest(test);
 
+  const handleSubmit = () => alert(`this will start ${tests}, are you sure ?`);
+
   return (
     <>
       <div className="min-h-96 text-2xl">
@@ -24,8 +26,8 @@ const Tags = () => {
         </TagGroup>
       </div>
       <Link href="first">
-        <button className="btn btn-primary" onClick={() => console.log(tests)}>
-          Show Selected
+        <button className="btn btn-primary" onClick={handleSubmit}>
+          Start Test
         </button>
       </Link>
     </>
