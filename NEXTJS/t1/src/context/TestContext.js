@@ -19,9 +19,18 @@ export const TestContextProvider = ({ children }) => {
     });
   };
 
+  const removeTest = (test) =>
+    dispatch({
+      type: "REMOVE_TEST",
+      payload: {
+        test,
+      },
+    });
+
   const value = {
     tests: state.tests,
     addTest,
+    removeTest,
   };
 
   return <TestContext.Provider value={value}>{children}</TestContext.Provider>;

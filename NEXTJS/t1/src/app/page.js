@@ -8,7 +8,7 @@ import TestPicker from "@/components/TestPicker";
 
 export default function Home() {
   return (
-    <div className="m-2 flex flex-col items-center justify-center">
+    <div className="m-2 flex flex-col items-center justify-start space-y-4">
       <div className="w-screen">
         <Hero />
       </div>

@@ -156,13 +156,12 @@ const data = [
 const RButton = () => {
   // const [treeData, setTreeData] = useState(data);
 
-  const [select, setSelect] = useState([]);
+  // const [select, setSelect] = useState([]);
   const { addTest } = getTests();
 
   const handleSelect = (node, value, event) => {
-    setSelect(() => [value]);
-    console.log(select);
-    addTest(select);
+    // setSelect(() => value);
+    addTest(value);
   };
 
   return (
@@ -201,14 +200,13 @@ const RButton = () => {
       <CheckTree
         defaultExpandAll
         cascade={false}
-        defaultValue={[2, 38]}
+        // defaultValue={[2, 38]}
         showIndentLine
         searchable
         uncheckableItemValues={["docs"]}
         onSelect={handleSelect}
         data={data}
       />
-      <button onClick={() => console.log(select)}>Show Selected</button>
     </>
   );
 };

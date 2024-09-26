@@ -2,16 +2,19 @@
 import React from "react";
 import RButton from "./RButton";
 import Tags from "./Tags";
-import { TestContextProvider } from "@/context/TestContext";
+import { getTests, TestContextProvider } from "@/context/TestContext";
 
 const TestPicker = () => {
+  const { tests } = getTests();
+
   return (
     <TestContextProvider>
-      <div className="flex items-start justify-center">
+      <div className="flex items-start justify-start">
         <div className="w-96">
           <RButton />
         </div>
-        <div>
+        <div className="p-6 w-96">
+          Selected Tests
           <Tags />
         </div>
       </div>

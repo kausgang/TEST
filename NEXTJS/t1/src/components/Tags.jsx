@@ -1,24 +1,34 @@
 "use client";
 import { getTests } from "@/context/TestContext";
+import Link from "next/link";
 import { Tag, TagGroup } from "rsuite";
 
 const Tags = () => {
-  const { tests } = getTests();
+  const { tests, removeTest } = getTests();
 
-  console.log(tests);
+  // const handleClose = (test) => removeTest(test);
 
   return (
-    // <TagGroup>
-    <div>
-      {tests.map((test) => (
-        <div>
-          <Tag closable className="m-4">
-            {test}
-          </Tag>
-        </div>
-      ))}
-    </div>
-    // </TagGroup>
+    <>
+      <div className="min-h-96 text-2xl">
+        <TagGroup>
+          {tests.map((test, index) => (
+            <Tag
+              key={index}
+              // closable
+              // onClose={() => handleClose(test)}
+            >
+              {test}
+            </Tag>
+          ))}
+        </TagGroup>
+      </div>
+      <Link href="first">
+        <button className="btn btn-primary" onClick={() => console.log(tests)}>
+          Show Selected
+        </button>
+      </Link>
+    </>
   );
 };
 
