@@ -7,8 +7,8 @@ const Header = () => {
       <Link className="btn btn-ghost text-xl" href="/">
         daisyUI
       </Link>
-      <Link className="btn btn-ghost text-xl" href="first">
-        First
+      <Link className="btn btn-ghost text-xl" href="exam">
+        Exam
       </Link>
       <div>''</div>
     </div>
