@@ -1,17 +1,20 @@
-import { Droppable } from "@/components/Droppable";
-import Timeline from "@/components/Timeline";
+// "use client";
 import Image from "next/image";
-import Example from "@/components/Example";
-import RButton from "@/components/RButton";
+// import RButton from "@/components/RButton";
+// import Tags from "@/components/Tags";
+// import { TestContextProvider } from "@/context/TestContext";
+import Hero from "@/components/Hero";
+import TestPicker from "@/components/TestPicker";
 
 export default function Home() {
   return (
-    <div className="p-4 flex items-center justify-center space-x-6">
-      {/* <Timeline /> */}
-      <div className="w-96">
-        <RButton />
+    <div className="m-2 flex flex-col items-center justify-center">
+      <div className="w-screen">
+        <Hero />
       </div>
-      <Example />
+      <div>
+        <TestPicker />
+      </div>
     </div>
   );
 }
