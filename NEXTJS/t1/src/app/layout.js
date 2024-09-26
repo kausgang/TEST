@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
 import Header from "@/components/Header";
 
 // const geistSans = localFont({
@@ -22,9 +23,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
+        <Header />
         {children}
       </body>
     </html>
