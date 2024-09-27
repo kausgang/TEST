@@ -25,7 +25,7 @@ const Tags = () => {
           ))}
         </TagGroup>
       </div>
-      <Link href="first">
+      <Link href="exam">
         <button className="btn btn-primary" onClick={handleSubmit}>
           Start Test
         </button>
