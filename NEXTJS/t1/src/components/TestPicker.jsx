@@ -2,10 +2,10 @@
 import React from "react";
 import RButton from "./RButton";
 import Tags from "./Tags";
-import { getTests, TestContextProvider } from "@/context/TestContext";
+import { TestContextProvider } from "@/context/TestContext";
 
 const TestPicker = () => {
-  const { tests } = getTests();
+  // const { tests } = getTests();
 
   return (
     <TestContextProvider>
@@ -13,8 +13,8 @@ const TestPicker = () => {
         <div className="w-96">
           <RButton />
         </div>
-        <div className="p-6 w-96">
-          Selected Tests
+        <div className="p-6 w-96 flex flex-col space-y-4">
+          <p className="text-3xl">Selected Tests</p>
           <Tags />
         </div>
       </div>
