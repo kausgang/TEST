@@ -1,7 +1,11 @@
 "use client";
 import { getTests } from "@/context/TestContext";
 import Link from "next/link";
-import { Tag, TagGroup } from "rsuite";
+// import { Tag, TagGroup } from "rsuite";
+import Tag from "rsuite/Tag";
+import TagGroup from "rsuite/TagGroup";
+import "rsuite/Tag/styles/index.css";
+import "rsuite/TagGroup/styles/index.css";
 
 const Tags = () => {
   const { tests, removeTest } = getTests();

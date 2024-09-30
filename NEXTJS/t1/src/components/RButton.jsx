@@ -1,9 +1,11 @@
 "use client";
-import { Tree, CheckTreePicker, Stack, CheckTree } from "rsuite";
+// import { Tree, CheckTreePicker, Stack, CheckTree } from "rsuite";
+import CheckTree from "rsuite/CheckTree";
 import FolderFillIcon from "@rsuite/icons/FolderFill";
 import PageIcon from "@rsuite/icons/Page";
 import { useState } from "react";
 import { getTests } from "@/context/TestContext";
+import "rsuite/CheckTree/styles/index.css";
 
 const data = [
   {

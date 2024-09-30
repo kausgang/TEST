@@ -3,6 +3,8 @@ import React from "react";
 
 import Radio from "rsuite/Radio";
 import RadioGroup from "rsuite/RadioGroup";
+import "rsuite/Radio/styles/index.css";
+import "rsuite/RadioGroup/styles/index.css";
 
 // (Optional) Import component styles. If you are using Less, import the `index.less` file.
 // import 'rsuite/Radio/styles/index.css';

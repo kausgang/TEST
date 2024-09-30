@@ -1,5 +1,9 @@
 "use client";
-import { Checkbox, CheckboxGroup } from "rsuite";
+// import { Checkbox, CheckboxGroup } from "rsuite";
+import Checkbox from "rsuite/Checkbox";
+import CheckboxGroup from "rsuite/CheckboxGroup";
+import "rsuite/Checkbox/styles/index.css";
+import "rsuite/CheckboxGroup/styles/index.css";
 
 const MultiSelect = ({ noOfChoices }) => {
   const choices = [];
