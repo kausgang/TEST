@@ -1,41 +1,18 @@
 import GhImage from "@/components/GhImage";
+import ImageLoading from "@/components/ImageLoading";
 import MultiSelect from "@/components/MultiSelect";
 import SingleSelect from "@/components/SingleSelect";
 import TestProgress from "@/components/TestProgress";
+import GetGHImage from "@/utils/GetGHImage";
 import { revalidatePath } from "next/cache";
 import React from "react";
 
-let pic = "pic.jpg";
+let pic = "";
 
 const getImage = async () => {
   "use server";
-  console.log("hrhrh");
 
-  const token = process.env.GITHUB_TOKEN; // Set this in your .env.local
-  const repo = "kausgang/test-private"; // Replace with your username/repo
-  const path = "image/pic.png"; // Replace with the path to your image
-
-  const response = await fetch(
-    `https://api.github.com/repos/${repo}/contents/${path}`,
-    // `https://raw.githubusercontent.com/kausgang/test-private/main/image/pic.png`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        // Accept: "application/vnd.github.v3.raw",
-      },
-    }
-  );
-
-  if (!response.ok) {
-    console.error("Failed to fetch image:", response.statusText);
-    return { notFound: true };
-  }
-
-  const data = await response.json();
-
-  console.log(data.download_url);
-
-  pic = data.download_url;
+  pic = await GetGHImage();
 
   revalidatePath("/exam");
 };
@@ -47,7 +24,7 @@ const page = () => {
       <TestProgress />
       <div>
         {/* <img src="pic.jpg" className="h-96" /> */}
-        <img src={pic} className="h-96" />
+        {pic === "" ? <ImageLoading /> : <img src={pic} className="h-96" />}
       </div>
       <form action={getImage}>
         <button type="submit" className="btn btn-primary">
