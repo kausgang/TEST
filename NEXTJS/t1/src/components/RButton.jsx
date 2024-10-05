@@ -253,7 +253,44 @@ const RButton = () => {
   };
 
   const path = "/item1/item2/item3/pic.png";
-  const data = [createJsonObject(path)];
+  // const data = [createJsonObject(path)];
+
+  const data = [
+    {
+      label: "AWS - Cloud Practitioner",
+      value: "AWS - Cloud Practitioner",
+      children: [
+        {
+          label: "Stephane",
+          value: "AWS - Cloud Practitioner/Stephane",
+          children: [
+            {
+              label: "Test1",
+              value: "AWS - Cloud Practitioner/Stephane/Test1",
+            },
+            {
+              label: "Test2",
+              value: "AWS - Cloud Practitioner/Stephane/Test2",
+            },
+          ],
+        },
+        {
+          label: "Neal",
+          value: "AWS - Cloud Practitioner/Neal",
+          children: [
+            {
+              label: "Test1",
+              value: "AWS - Cloud Practitioner/Neal/Test1",
+            },
+            {
+              label: "Test2",
+              value: "AWS - Cloud Practitioner/Neal/Test2",
+            },
+          ],
+        },
+      ],
+    },
+  ];
 
   console.log(data);
 
