@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 // import "rsuite/dist/rsuite-no-reset.min.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Header from "@/components/Header";
 
 // const geistSans = localFont({
@@ -22,12 +23,14 @@ import Header from "@/components/Header";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-      // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        {children}
-      </body>
+      <UserProvider>
+        <body
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Header />
+          {children}
+        </body>
+      </UserProvider>
     </html>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Header = () => {
   return (
@@ -10,7 +11,15 @@ const Header = () => {
       <Link className="btn btn-ghost text-xl" href="exam">
         Exam
       </Link>
-      <div>''</div>
+      <div className="flex space-x-2">
+        <a href="/api/auth/login">
+          <button className="btn btn-primary">Login</button>
+        </a>
+        <a href="/api/auth/logout">
+          <button className="btn btn-primary">Logout</button>
+        </a>
+        <ProfileDropdown />
+      </div>
     </div>
   );
 };
