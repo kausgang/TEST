@@ -12,12 +12,6 @@ const Header = () => {
         Exam
       </Link>
       <div className="flex space-x-2">
-        <a href="/api/auth/login">
-          <button className="btn btn-primary">Login</button>
-        </a>
-        <a href="/api/auth/logout">
-          <button className="btn btn-primary">Logout</button>
-        </a>
         <ProfileDropdown />
       </div>
     </div>

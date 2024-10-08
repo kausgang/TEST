@@ -1,47 +1,50 @@
 "use client";
-import { Dropdown, Avatar } from "rsuite";
+// import { Dropdown, Avatar } from "rsuite";
 
 // (Optional) Import component styles. If you are using Less, import the `index.less` file.
-import "rsuite/Dropdown/styles/index.css";
+// import "rsuite/Dropdown/styles/index.css";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const ProfileDropdown = () => {
-  const renderToggle = (props) => (
-    <Avatar circle {...props} src="https://i.pravatar.cc/150?u=1" />
-  );
-  return (
-    // <Dropdown renderToggle={renderToggle}>
-    //   <Dropdown.Item panel style={{ padding: 10, width: 160 }}>
-    //     <p>Signed in as</p>
-    //     <strong>Tony</strong>
-    //   </Dropdown.Item>
-    //   <Dropdown.Separator />
-    //   <Dropdown.Item>Your profile</Dropdown.Item>
-    //   <Dropdown.Item>Your stars</Dropdown.Item>
-    //   <Dropdown.Item>Your Gists</Dropdown.Item>
-    //   <Dropdown.Separator />
-    //   <Dropdown.Item>Help</Dropdown.Item>
-    //   <Dropdown.Item>Settings</Dropdown.Item>
-    //   <Dropdown.Item>Sign out</Dropdown.Item>
-    // </Dropdown>
+  const { user, error, isLoading } = useUser();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
 
-    <Dropdown renderToggle={renderToggle}>
-      <Dropdown.Item
-        panel
-        //   style={{ padding: 10, width: 160 }}
-      >
-        <p>Signed in as</p>
-        <strong>Tony</strong>
-      </Dropdown.Item>
-      <Dropdown.Separator />
-      <Dropdown.Item>Your profile</Dropdown.Item>
-      <Dropdown.Item>Your stars</Dropdown.Item>
-      <Dropdown.Item>Your Gists</Dropdown.Item>
-      <Dropdown.Separator />
-      <Dropdown.Item>Help</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
-    </Dropdown>
-  );
+  if (user)
+    return (
+      <div className="dropdown dropdown-end">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-10 rounded-full">
+            <img
+              alt="Tailwind CSS Navbar component"
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            />
+          </div>
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+        >
+          <li>
+            <a className="justify-between" href="/api/auth/me">
+              Profile
+              {/* <span className="badge">New</span> */}
+            </a>
+          </li>
+
+          <li>
+            <a href="/api/auth/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    );
+
+  return <a href="/api/auth/login">Login</a>;
 };
 
 export default ProfileDropdown;
