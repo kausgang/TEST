@@ -3,6 +3,7 @@ import "./globals.css";
 // import "rsuite/dist/rsuite-no-reset.min.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Header from "@/components/Header";
+import Drawer from "@/components/Drawer";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -21,14 +22,61 @@ import Header from "@/components/Header";
 // };
 
 export default function RootLayout({ children }) {
+  // return (
+  //   <html lang="en">
+  //     <UserProvider>
+  //       <body
+  //       // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+  //       >
+  //         <Header />
+
+  //         {children}
+  //       </body>
+  //     </UserProvider>
+  //   </html>
+  // );
+
+  let arr = [];
+  for (let index = 0; index < 4; index++) {
+    arr.push(index);
+  }
+
   return (
     <html lang="en">
       <UserProvider>
-        <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Header />
-          {children}
+        <body>
+          {/* main content */}
+          <div className="drawer lg:drawer-open">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+
+            <div className="drawer-content flex flex-col items-center justify-center">
+              {children}
+            </div>
+
+            <div className="drawer-side">
+              <label
+                htmlFor="my-drawer-2"
+                aria-label="close sidebar"
+                className="drawer-overlay"
+              ></label>
+              <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                {/* Sidebar content here */}
+                {arr.map((item) => (
+                  <li>
+                    <a>Sidebar Item {item}</a>
+                  </li>
+                ))}
+                {/* <li>
+                  <a>Sidebar Item 1</a>
+                </li>
+                <li>
+                  <a>Sidebar Item 2</a>
+                </li> */}
+              </ul>
+            </div>
+          </div>
+
+          {/* sidebar */}
         </body>
       </UserProvider>
     </html>
