@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Header from "@/components/Header";
 import Drawer from "@/components/Drawer";
+import DrawerSidebar from "@/components/sidebar/DrawerSidebar";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -59,20 +60,15 @@ export default function RootLayout({ children }) {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                {/* Sidebar content here */}
-                {arr.map((item) => (
-                  <li>
-                    <a>Sidebar Item {item}</a>
-                  </li>
-                ))}
-                {/* <li>
+              {/* <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                <li>
                   <a>Sidebar Item 1</a>
                 </li>
                 <li>
                   <a>Sidebar Item 2</a>
-                </li> */}
-              </ul>
+                </li>
+              </ul> */}
+              <DrawerSidebar />
             </div>
           </div>
 

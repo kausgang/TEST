@@ -29,11 +29,18 @@ const Tags = () => {
           ))}
         </TagGroup>
       </div>
-      <Link href="exam">
-        <button className="btn btn-primary" onClick={handleSubmit}>
-          Start Test
-        </button>
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="exam">
+          <button className="btn btn-primary" onClick={handleSubmit}>
+            Review
+          </button>
+        </Link>
+        <Link href="exam">
+          <button className="btn btn-primary" onClick={handleSubmit}>
+            Exam
+          </button>
+        </Link>
+      </div>
     </>
   );
 };

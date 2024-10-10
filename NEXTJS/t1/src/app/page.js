@@ -5,9 +5,9 @@ import Image from "next/image";
 // import { TestContextProvider } from "@/context/TestContext";
 import Hero from "@/components/Hero";
 import TestPicker from "@/components/TestPicker";
-import { getAccessToken } from "@auth0/nextjs-auth0";
+import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 
-export default function Home() {
+export default async function Home() {
   const printAccessToken = async () => {
     "use server";
 
@@ -16,11 +16,18 @@ export default function Home() {
     console.log("access token = ", accessToken);
   };
 
+  const session = await getSession();
+
+  const { user } = session || false;
+
   return (
     <div className="m-2 flex flex-col items-center justify-start space-y-4">
-      <div className="m-2 w-3/4">
-        <Hero />
-      </div>
+      {!user && (
+        <div className="m-2 w-3/4">
+          <Hero />
+        </div>
+      )}
+
       <div>
         <form action={printAccessToken}>
           <button className="btn btn-secondary" type="submit">
@@ -28,9 +35,8 @@ export default function Home() {
           </button>
         </form>
       </div>
-      <div>
-        <TestPicker />
-      </div>
+
+      {user && <TestPicker />}
     </div>
   );
 }
