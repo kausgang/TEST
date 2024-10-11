@@ -16,30 +16,35 @@ const Tags = () => {
 
   return (
     <>
-      <div className="min-h-96 text-2xl">
-        <TagGroup>
-          {tests.map((test, index) => (
-            <Tag
-              key={index}
-              // closable
-              // onClose={() => handleClose(test)}
-            >
-              {test}
-            </Tag>
-          ))}
-        </TagGroup>
-      </div>
-      <div className="flex items-center justify-between">
-        <Link href="exam">
-          <button className="btn btn-primary" onClick={handleSubmit}>
-            Review
-          </button>
-        </Link>
-        <Link href="exam">
-          <button className="btn btn-primary" onClick={handleSubmit}>
-            Exam
-          </button>
-        </Link>
+      <div className="flex ">
+        {/* selected tag panel */}
+        <div className="min-w-72 text-2xl">
+          <TagGroup>
+            {tests.map((test, index) => (
+              <Tag
+                key={index}
+                // closable
+                // onClose={() => handleClose(test)}
+              >
+                {test}
+              </Tag>
+            ))}
+          </TagGroup>
+        </div>
+
+        {/* action buttons */}
+        <div className="flex flex-col items-center space-y-2">
+          <Link href="exam">
+            <button className="btn btn-primary w-24" onClick={handleSubmit}>
+              Review
+            </button>
+          </Link>
+          <Link href="exam">
+            <button className="btn btn-primary w-24" onClick={handleSubmit}>
+              Exam
+            </button>
+          </Link>
+        </div>
       </div>
     </>
   );
