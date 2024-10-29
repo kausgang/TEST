@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const NavPanel = () => {
@@ -9,6 +10,12 @@ const NavPanel = () => {
         </li>
         <li>
           <a href="/api/auth/logout">Logout</a>
+        </li>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/exam">Exam</Link>
         </li>
       </ul>
     </div>

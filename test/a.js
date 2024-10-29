@@ -59,11 +59,23 @@ function transformData(originalData) {
 
     // item.tests((test) => {
     teacherEntry.children.push({
-      label: test,
-      value: `${item.course}/${item.teacher}/${test}`,
+      label: item.test,
+      value: `${item.course}/${item.teacher}/${item.test}`,
     });
     // });
   });
 
   return result;
 }
+
+const fetchedData = [
+  { test: "Test 1", teacher: "Stephane", course: "AWS - Cloud Practitioner" },
+  { test: "Test 1", teacher: "Neal", course: "AWS - Cloud Practitioner" },
+  { test: "Test 2", teacher: "Neal", course: "AWS - Cloud Practitioner" },
+];
+
+// Transform the data
+const transformedData = transformData(fetchedData);
+
+// Now you can use transformedData in your component
+console.log(transformedData);

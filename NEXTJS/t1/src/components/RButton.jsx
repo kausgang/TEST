@@ -296,37 +296,6 @@ const RButton = () => {
 
   // const data = [];
   return (
-    // <Tree
-    //   data={treeData}
-    //   draggable
-    //   defaultExpandAll
-    //   onDrop={({ createUpdateDataFunction }, event) =>
-    //     setTreeData(createUpdateDataFunction(treeData))
-    //   }
-    // />
-
-    // <Tree
-    //   searchable
-    //   draggable
-    //   onDragEnd={handleDrop}
-    //   onDrop={({ createUpdateDataFunction }, event) => {
-    //     setTreeData(createUpdateDataFunction(treeData));
-    //     console.log(event);
-    //   }}
-    //   data={treeData}
-    // />
-
-    // <Stack spacing={10} direction="column" alignItems="flex-start">
-    //   <CheckTreePicker defaultExpandAll data={data} style={{ width: 280 }} />
-    //   {/* <CheckTreePicker
-    //     defaultExpandAll
-    //     data={data}
-    //     searchable={false}
-    //     style={{ width: 280 }}
-    //     placeholder="Select without search"
-    //   /> */}
-    // </Stack>
-
     <>
       <CheckTree
         defaultExpandAll
