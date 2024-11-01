@@ -18,7 +18,7 @@
 // // Now you can use transformedData in your component
 // console.log(transformedData);
 
-function transformData(originalData) {
+export function transformData(originalData) {
   const result = [];
 
   // Iterate through each record in the original data

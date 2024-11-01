@@ -6,6 +6,7 @@ import PageIcon from "@rsuite/icons/Page";
 import { useState } from "react";
 import { getTests } from "@/context/TestContext";
 import "rsuite/CheckTree/styles/index.css";
+// import GetSFData from "@/utils/GetSFData";
 
 // const data1 = [
 //   {
@@ -241,7 +242,7 @@ function createJsonObject(pathString) {
 //   },
 // ];
 
-const RButton = () => {
+const RButton = async () => {
   // const [treeData, setTreeData] = useState(data);
 
   // const [select, setSelect] = useState([]);
@@ -292,7 +293,12 @@ const RButton = () => {
     },
   ];
 
-  console.log(data);
+  // console.log(data);
+
+  // const sf_tests = await GetSFData();
+  const response = await fetch(`http://localhost:3000/api/getSFData`);
+  const data_json = await response.json();
+  console.log(data_json);
 
   // const data = [];
   return (
