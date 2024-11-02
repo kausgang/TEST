@@ -59,8 +59,8 @@ export function transformData(originalData) {
 
     // item.tests((test) => {
     teacherEntry.children.push({
-      label: test,
-      value: `${item.course}/${item.teacher}/${test}`,
+      label: item.test,
+      value: `${item.course}/${item.teacher}/${item.test}`,
     });
     // });
   });

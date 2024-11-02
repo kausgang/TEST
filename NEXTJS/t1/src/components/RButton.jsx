@@ -3,9 +3,10 @@
 import CheckTree from "rsuite/CheckTree";
 import FolderFillIcon from "@rsuite/icons/FolderFill";
 import PageIcon from "@rsuite/icons/Page";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getTests } from "@/context/TestContext";
 import "rsuite/CheckTree/styles/index.css";
+import { transformData } from "@/utils/SF_Transform";
 // import GetSFData from "@/utils/GetSFData";
 
 // const data1 = [
@@ -242,10 +243,11 @@ function createJsonObject(pathString) {
 //   },
 // ];
 
-const RButton = async () => {
-  // const [treeData, setTreeData] = useState(data);
+const RButton = ({ tests }) => {
+  const [data, setData] = useState(tests);
 
-  // const [select, setSelect] = useState([]);
+  console.log(tests);
+
   const { addTest } = getTests();
 
   const handleSelect = (node, value, event) => {
@@ -253,52 +255,67 @@ const RButton = async () => {
     addTest(value);
   };
 
-  const path = "/item1/item2/item3/pic.png";
+  // const path = "/item1/item2/item3/pic.png";
   // const data = [createJsonObject(path)];
 
-  const data = [
-    {
-      label: "AWS - Cloud Practitioner",
-      value: "AWS - Cloud Practitioner",
-      children: [
-        {
-          label: "Stephane",
-          value: "AWS - Cloud Practitioner/Stephane",
-          children: [
-            {
-              label: "Test1",
-              value: "AWS - Cloud Practitioner/Stephane/Test1",
-            },
-            {
-              label: "Test2",
-              value: "AWS - Cloud Practitioner/Stephane/Test2",
-            },
-          ],
-        },
-        {
-          label: "Neal",
-          value: "AWS - Cloud Practitioner/Neal",
-          children: [
-            {
-              label: "Test1",
-              value: "AWS - Cloud Practitioner/Neal/Test1",
-            },
-            {
-              label: "Test2",
-              value: "AWS - Cloud Practitioner/Neal/Test2",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  // const data = [
+  //   {
+  //     label: "AWS - Cloud Practitioner",
+  //     value: "AWS - Cloud Practitioner",
+  //     children: [
+  //       {
+  //         label: "Stephane",
+  //         value: "AWS - Cloud Practitioner/Stephane",
+  //         children: [
+  //           {
+  //             label: "Test1",
+  //             value: "AWS - Cloud Practitioner/Stephane/Test1",
+  //           },
+  //           {
+  //             label: "Test2",
+  //             value: "AWS - Cloud Practitioner/Stephane/Test2",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         label: "Neal",
+  //         value: "AWS - Cloud Practitioner/Neal",
+  //         children: [
+  //           {
+  //             label: "Test1",
+  //             value: "AWS - Cloud Practitioner/Neal/Test1",
+  //           },
+  //           {
+  //             label: "Test2",
+  //             value: "AWS - Cloud Practitioner/Neal/Test2",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
 
   // console.log(data);
 
-  // const sf_tests = await GetSFData();
-  const response = await fetch(`http://localhost:3000/api/getSFData`);
-  const data_json = await response.json();
-  console.log(data_json);
+  // let data = [];
+
+  // if (loading) return <div>Loading...</div>;
+  // if (!data) return <div>No data</div>;
+
+  // try {
+  //   // const sf_tests = await GetSFData();
+  //   const response = await fetch(`http://localhost:3000/api/getSFData`);
+
+  //   console.log(response);
+
+  //   const data_json = await response.json();
+
+  //   console.log("data=", data_json);
+
+  //   // data = transformData(data_json);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   // const data = [];
   return (
@@ -311,7 +328,7 @@ const RButton = async () => {
         searchable
         uncheckableItemValues={["docs"]}
         onSelect={handleSelect}
-        data={data}
+        data={tests}
       />
     </>
   );

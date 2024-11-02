@@ -6,6 +6,7 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import TestPicker from "@/components/TestPicker";
 import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
+import { transformData } from "@/utils/SF_Transform";
 
 export default async function Home() {
   const printAccessToken = async () => {
@@ -19,6 +20,30 @@ export default async function Home() {
   const session = await getSession();
 
   const { user } = session || false;
+
+  // let tests;
+
+  // const fetchData = async () => {
+  // setLoading(true);
+  // try {
+
+  let tests;
+  if (session) {
+    const response = await fetch("http://localhost:3000/api/getSFData");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    tests = transformData(result);
+
+    // if (isMounted setData(transform(result));
+    // }
+    // catch (error) {
+    //   console.error("Fetch error:", error);
+    // } finally {
+    //   // if (isMounted) setLoading(false); // Update loading state only if mounted
+    // }
+  }
 
   return (
     <div className="m-2 flex flex-col items-center justify-start space-y-4">
@@ -36,7 +61,7 @@ export default async function Home() {
         </form>
       </div>
 
-      {user && <TestPicker />}
+      {user && <TestPicker initialData={tests} />}
     </div>
   );
 }

@@ -1,24 +1,41 @@
-// app/api/getSFData/route.js
-import { getAccessToken } from "@auth0/nextjs-auth0";
+import getSalesforceToken from "@/utils/getSalesforceToken";
+import axios from "axios";
 import { NextResponse } from "next/server";
 
+// export default async function handler(req, res) {
 export async function GET(req) {
-  try {
-    const res = new NextResponse();
+  const res = new NextResponse();
 
-    const { accessToken } = await getAccessToken(req, res);
+  try {
+    const accessToken = await getSalesforceToken();
+
     console.log(accessToken);
 
-    const response = await fetch(`${process.env.SF_GETTEST_ENDPOINT}`, {
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await response.json();
+    // Use the access token to make an API call to Salesforce
+    const salesforceResponse = await axios.get(
+      //   "https://test-18d-dev-ed.develop.my.salesforce.com/services/data/v54.0/sobjects/Account", // Example endpoint
+      process.env.SF_GETTEST_ENDPOINT,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
-    return new Response(JSON.stringify(data), { status: 200 });
+    console.log(salesforceResponse.data);
+
+    // return new NextResponse(JSON.stringify(salesforceResponse), {
+    //   status: 200,
+    // });
+
+    return new NextResponse(JSON.stringify(salesforceResponse.data), {
+      status: 200,
+    });
+
+    // return res.status(200).json(salesforceResponse.data);
   } catch (error) {
-    console.error("Error fetching Salesforce data:", error);
+    console.error("Error fetching Salesforce data:");
+    // res.status(500).json({ error: "Error fetching Salesforce data" });
     return new Response(
       JSON.stringify({ error: "Failed to fetch Salesforce data" }),
       { status: 500 }
