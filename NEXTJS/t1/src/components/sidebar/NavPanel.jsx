@@ -15,7 +15,7 @@ const NavPanel = () => {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/exam">Exam</Link>
+          <Link href="/api/auth/me">profile</Link>
         </li>
       </ul>
     </div>

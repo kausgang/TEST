@@ -33,6 +33,8 @@ export default async function getSalesforceToken() {
       }
     );
 
+    console.log("response data = ", response.data.access_token);
+
     // Salesforce returns an access token if successful
     return response.data.access_token;
   } catch (error) {
