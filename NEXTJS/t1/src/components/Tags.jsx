@@ -6,6 +6,7 @@ import Tag from "rsuite/Tag";
 import TagGroup from "rsuite/TagGroup";
 import "rsuite/Tag/styles/index.css";
 import "rsuite/TagGroup/styles/index.css";
+import reviewTests from "@/utils/reviewTests";
 
 const Tags = () => {
   const { tests, removeTest } = getTests();
@@ -13,6 +14,8 @@ const Tags = () => {
   // const handleClose = (test) => removeTest(test);
 
   const handleSubmit = () => alert(`this will start ${tests}, are you sure ?`);
+
+  const handleReview = () => reviewTests(tests);
 
   return (
     <>
@@ -34,8 +37,8 @@ const Tags = () => {
 
         {/* action buttons */}
         <div className="flex flex-col items-center space-y-2">
-          <Link href="exam">
-            <button className="btn btn-primary w-24" onClick={handleSubmit}>
+          <Link href="review">
+            <button className="btn btn-primary w-24" onClick={handleReview}>
               Review
             </button>
           </Link>

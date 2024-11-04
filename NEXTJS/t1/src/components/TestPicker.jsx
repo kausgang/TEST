@@ -7,7 +7,7 @@ import { TestContextProvider } from "@/context/TestContext";
 const TestPicker = ({ initialData }) => {
   // const { tests } = getTests();
 
-  console.log(initialData);
+  // console.log(initialData);
 
   return (
     <TestContextProvider>

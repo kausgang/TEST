@@ -9,7 +9,7 @@ export async function GET(req) {
   try {
     const accessToken = await getSalesforceToken();
 
-    console.log(accessToken);
+    console.log("printing now", accessToken);
 
     // Use the access token to make an API call to Salesforce
     const salesforceResponse = await axios.get(
