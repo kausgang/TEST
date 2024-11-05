@@ -10,7 +10,9 @@ const getExam = async (tests) => {
       method: "POST",
       data: tests,
     });
+    console.log(response.data);
   } catch (error) {}
+
   return <div>getExam</div>;
 };
 

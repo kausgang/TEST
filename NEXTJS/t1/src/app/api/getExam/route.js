@@ -17,7 +17,15 @@ export async function POST(req) {
     data: { tests: data },
   });
 
-  console.log(response);
+  console.log(response.data);
 
-  return new NextResponse({}, { status: 200 });
+  //   return new Response(JSON.stringify(response.data), {
+  //     status: 200,
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+
+  // Return the Salesforce data using NextResponse
+  return NextResponse.json(response.data, {
+    status: 200, // HTTP Status Code
+  });
 }
