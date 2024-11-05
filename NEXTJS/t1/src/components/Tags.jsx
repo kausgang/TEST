@@ -7,13 +7,18 @@ import TagGroup from "rsuite/TagGroup";
 import "rsuite/Tag/styles/index.css";
 import "rsuite/TagGroup/styles/index.css";
 import reviewTests from "@/utils/reviewTests";
+import getExam from "@/utils/getExam";
 
 const Tags = () => {
   const { tests, removeTest } = getTests();
 
   // const handleClose = (test) => removeTest(test);
 
-  const handleSubmit = () => alert(`this will start ${tests}, are you sure ?`);
+  const handleExam = () => {
+    // alert(`this will start ${tests}, are you sure ?`);
+
+    getExam(tests);
+  };
 
   const handleReview = () => reviewTests(tests);
 
@@ -43,7 +48,7 @@ const Tags = () => {
             </button>
           </Link>
           <Link href="exam">
-            <button className="btn btn-primary w-24" onClick={handleSubmit}>
+            <button className="btn btn-primary w-24" onClick={handleExam}>
               Exam
             </button>
           </Link>
