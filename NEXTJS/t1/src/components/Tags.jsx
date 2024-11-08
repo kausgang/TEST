@@ -14,10 +14,16 @@ const Tags = () => {
 
   // const handleClose = (test) => removeTest(test);
 
-  const handleExam = () => {
+  // Construct the URL with search parameters
+  const searchParams = new URLSearchParams({ tests: JSON.stringify(tests) });
+  const examPageUrl = `/exam?${searchParams.toString()}`;
+
+  const handleExam = async () => {
     // alert(`this will start ${tests}, are you sure ?`);
 
-    getExam(tests);
+    // getExam(tests);
+
+    await fetch(`/exam?tests=${tests}`);
   };
 
   const handleReview = () => reviewTests(tests);
@@ -47,10 +53,11 @@ const Tags = () => {
               Review
             </button>
           </Link>
-          <Link href="exam">
-            <button className="btn btn-primary w-24" onClick={handleExam}>
+          <Link href={examPageUrl}>
+            {/* <button className="btn btn-primary w-24" onClick={handleExam}>
               Exam
-            </button>
+            </button> */}
+            <button className="btn btn-primary w-24">Exam</button>
           </Link>
         </div>
       </div>

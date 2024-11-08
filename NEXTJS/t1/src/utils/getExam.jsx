@@ -1,4 +1,5 @@
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 const getExam = async (tests) => {
   try {
@@ -11,6 +12,7 @@ const getExam = async (tests) => {
       data: tests,
     });
     console.log(response.data);
+    redirect("/exam");
   } catch (error) {}
 
   return <div>getExam</div>;

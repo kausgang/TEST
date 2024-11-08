@@ -1,6 +1,7 @@
 import getSalesforceToken from "@/utils/getSalesforceToken";
 import axios from "axios";
 import { NextResponse } from "next/server";
+
 export async function POST(req) {
   const data = await req.json();
   //   get access token
@@ -17,7 +18,7 @@ export async function POST(req) {
     data: { tests: data },
   });
 
-  console.log(response.data);
+  // console.log(response.data);
 
   //   return new Response(JSON.stringify(response.data), {
   //     status: 200,

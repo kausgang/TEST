@@ -1,18 +1,17 @@
 "use server";
 
-const GetGHImage = async (image_location) => {
+const GetGHImage = async () => {
   try {
     const token = process.env.GITHUB_TOKEN; // Set this in your .env.local
     const owner = process.env.OWNER;
     const repo = process.env.REPO;
-    // const image_location = process.env.IMAGE_LOCATION;
+    const image_location = process.env.IMAGE_LOCATION;
 
     // const repo = "kausgang/test-private"; // Replace with your username/repo
     // const path = "image/pic.png"; // Replace with the path to your image
 
     const URL = `https://api.github.com/repos/${owner}/${repo}/contents/${image_location}`;
 
-    console.log(URL);
     const response = await fetch(
       //   `https://api.github.com/repos/${repo}/contents/${path}`,
       URL,
@@ -31,7 +30,7 @@ const GetGHImage = async (image_location) => {
 
     const data = await response.json();
 
-    console.log("github data = ", data.download_url);
+    console.log(data.download_url);
 
     return data.download_url;
   } catch (error) {
