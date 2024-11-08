@@ -29,8 +29,6 @@ const page = async ({ searchParams }) => {
   // get the test names
   const tests = JSON.parse(searchParams.tests || "[]"); // Default to an empty array if null
 
-  await fetch("/api/getAll");
-
   // call internal api to get data from salesforce
   const accessToken = await getSalesforceToken();
   const response = await axios({
