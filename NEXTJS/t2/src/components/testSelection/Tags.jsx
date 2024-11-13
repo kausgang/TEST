@@ -6,8 +6,8 @@ import Tag from "rsuite/Tag";
 import TagGroup from "rsuite/TagGroup";
 import "rsuite/Tag/styles/index.css";
 import "rsuite/TagGroup/styles/index.css";
-import reviewTests from "@/utils/reviewTests";
-import getExam from "@/utils/getExam";
+// import reviewTests from "@/utils/reviewTests";
+// import getExam from "@/utils/getExam";
 
 const Tags = () => {
   const { tests, removeTest } = getTests();
@@ -16,7 +16,7 @@ const Tags = () => {
 
   // Construct the URL with search parameters
   const searchParams = new URLSearchParams({ tests: JSON.stringify(tests) });
-  const examPageUrl = `/allQuestions?${searchParams.toString()}`;
+  const examPageUrl = `/exam?${searchParams.toString()}`;
 
   const handleExam = async () => {
     // alert(`this will start ${tests}, are you sure ?`);

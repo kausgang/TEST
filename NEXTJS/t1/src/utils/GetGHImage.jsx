@@ -12,7 +12,7 @@ const GetGHImage = async (image_location) => {
 
     const URL = `https://api.github.com/repos/${owner}/${repo}/contents/${image_location}`;
 
-    console.log(URL);
+    // console.log(URL);
     const response = await fetch(
       //   `https://api.github.com/repos/${repo}/contents/${path}`,
       URL,
@@ -21,6 +21,7 @@ const GetGHImage = async (image_location) => {
           Authorization: `Bearer ${token}`,
           // Accept: "application/vnd.github.v3.raw",
         },
+        cache: "no-store",
       }
     );
 
@@ -31,7 +32,7 @@ const GetGHImage = async (image_location) => {
 
     const data = await response.json();
 
-    console.log("github data = ", data.download_url);
+    // console.log("github data = ", data.download_url);
 
     return data.download_url;
   } catch (error) {
