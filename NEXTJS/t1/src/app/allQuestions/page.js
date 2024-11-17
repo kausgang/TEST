@@ -4,9 +4,7 @@ import MultiSelect from "@/components/MultiSelect";
 import SingleSelect from "@/components/SingleSelect";
 import TestProgress from "@/components/TestProgress";
 import GetGHImage from "@/utils/GetGHImage";
-import { revalidatePath } from "next/cache";
 import React from "react";
-import axios from "axios";
 import getSalesforceToken from "@/utils/getSalesforceToken";
 import ImageClientComponent from "@/components/ImageClientComponent";
 
@@ -39,12 +37,18 @@ const getImgUrl = async (tests, accessToken) => {
 
   const data = await response.json();
 
+  // console.log(data);
+
   for (const element of data) {
     pic = await GetGHImage(element.Github_URL__c);
-    github_url.push(pic);
+
+    //form the return statement
+    let obj = { SF_ImageId: element.Id, github_tokenURL: pic };
+    // github_url.push(pic);
+    github_url.push(obj);
   }
 
-  console.log(github_url);
+  // console.log(github_url);
 
   return github_url;
 };
@@ -56,22 +60,31 @@ const page = async ({ searchParams }) => {
   // call internal api to get data from salesforce
   const accessToken = await getSalesforceToken();
 
-  const github_url = await getImgUrl(tests, accessToken);
+  const image_data = await getImgUrl(tests, accessToken);
 
   return (
     <div className="flex flex-col items-center justify-center m-6 space-y-4">
       <TestProgress />
       <div>
-        {github_url.map((element, index) => {
+        {/* {image_data.map((element, index) => {
           return pic === "" ? (
             <ImageLoading />
           ) : pic.notFound ? (
             <p>No Image</p>
           ) : (
-            // <img src={element} />
-            <ImageClientComponent key={index} url={element} />
+            <ImageClientComponent
+              SF_ImageId={element.SF_ImageId}
+              url={element.github_tokenURL}
+            />
           );
-        })}
+        })} */}
+        {image_data.map((element) => (
+          <ImageClientComponent
+            key={element.SF_ImageId}
+            SF_ImageId={element.SF_ImageId}
+            url={element.github_tokenURL}
+          />
+        ))}
       </div>
     </div>
   );
