@@ -24,7 +24,7 @@ const getSFTests = async (accessToken, user) => {
       //   "https://test-18d-dev-ed.develop.my.salesforce.com/services/data/v54.0/sobjects/Account", // Example endpoint
     );
 
-    // console.log(salesforceResponse);
+    // console.log(salesforceResponse.data);
 
     // return salesforceResponse.data;
 

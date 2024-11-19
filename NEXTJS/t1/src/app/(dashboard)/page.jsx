@@ -30,6 +30,7 @@ export default async function Home() {
     }
     const result = await response.json();
     tests = transformData(result);
+    console.log(tests);
   }
 
   return (

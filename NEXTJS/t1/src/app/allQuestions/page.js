@@ -7,6 +7,7 @@ import GetGHImage from "@/utils/GetGHImage";
 import React from "react";
 import getSalesforceToken from "@/utils/getSalesforceToken";
 import ImageClientComponent from "@/components/ImageClientComponent";
+import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 
 let pic = "";
 
@@ -23,6 +24,11 @@ let pic = "";
 // };
 
 const getImgUrl = async (tests, accessToken) => {
+  const session = await getSession();
+  const { user } = session || false;
+
+  console.log("user=", user.email);
+
   let github_url = [];
 
   // get short github url from SF
@@ -32,7 +38,8 @@ const getImgUrl = async (tests, accessToken) => {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ tests }),
+    // body: JSON.stringify({ tests }),
+    body: JSON.stringify({ email: user.email, tests }),
   });
 
   const data = await response.json();

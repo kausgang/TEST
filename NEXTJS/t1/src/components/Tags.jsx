@@ -57,7 +57,7 @@ const Tags = () => {
             {/* <button className="btn btn-primary w-24" onClick={handleExam}>
               Exam
             </button> */}
-            <button className="btn btn-primary w-24">Exam</button>
+            <button className="btn btn-primary w-24">All Questions</button>
           </Link>
         </div>
       </div>

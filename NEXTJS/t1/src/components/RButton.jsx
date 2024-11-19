@@ -244,9 +244,9 @@ function createJsonObject(pathString) {
 // ];
 
 const RButton = ({ tests }) => {
-  const [data, setData] = useState(tests);
+  // const [data, setData] = useState(tests);
 
-  // console.log(tests);
+  console.log(tests);
 
   const { addTest } = getTests();
 
