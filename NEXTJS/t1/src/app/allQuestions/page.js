@@ -47,10 +47,14 @@ const getImgUrl = async (tests, accessToken) => {
   // console.log(data);
 
   for (const element of data) {
-    pic = await GetGHImage(element.Github_URL__c);
+    pic = await GetGHImage(element.githubURL);
 
     //form the return statement
-    let obj = { SF_ImageId: element.Id, github_tokenURL: pic };
+    let obj = {
+      SF_ImageId: element.Id,
+      github_tokenURL: pic,
+      favorite: element.favorite,
+    };
     // github_url.push(pic);
     github_url.push(obj);
   }
@@ -90,6 +94,7 @@ const page = async ({ searchParams }) => {
             key={element.SF_ImageId}
             SF_ImageId={element.SF_ImageId}
             url={element.github_tokenURL}
+            favorite={element.favorite}
           />
         ))}
       </div>
