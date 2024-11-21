@@ -27,7 +27,7 @@ const getImgUrl = async (tests, accessToken) => {
   const session = await getSession();
   const { user } = session || false;
 
-  console.log("user=", user.email);
+  // console.log("user=", user.email);
 
   let github_url = [];
 
@@ -51,7 +51,8 @@ const getImgUrl = async (tests, accessToken) => {
 
     //form the return statement
     let obj = {
-      SF_ImageId: element.Id,
+      userId: element.userId,
+      SF_ImageId: element.imageId,
       github_tokenURL: pic,
       favorite: element.favorite,
     };
@@ -92,6 +93,7 @@ const page = async ({ searchParams }) => {
         {image_data.map((element) => (
           <ImageClientComponent
             key={element.SF_ImageId}
+            userId={element.userId}
             SF_ImageId={element.SF_ImageId}
             url={element.github_tokenURL}
             favorite={element.favorite}
