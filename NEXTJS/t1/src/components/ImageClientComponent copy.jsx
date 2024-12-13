@@ -1,11 +1,10 @@
-// "use client";
+"use client";
 // import { revalidatePath } from "next/cache";
 // import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 import { markFavoriteAction } from "@/app/actions/markFavorite";
-import { revalidatePath } from "next/cache";
 
 import Image from "next/image";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // const markFavorite = async (formData) => {
 //   "use server";
@@ -21,23 +20,14 @@ import Image from "next/image";
 // };
 
 const ImageClientComponent = ({ userId, SF_ImageId, url, favorite }) => {
-  // const [fav, setFav] = useState(false);
+  const [fav, setFav] = useState(false);
 
-  // useEffect(() => setFav(favorite), []);
+  useEffect(() => setFav(favorite), []);
 
-  let fav = favorite;
-
-  const markFavorite = async (formData) => {
-    "use server";
-
-    // setFav(true);
+  const markFavorite = async (e) => {
+    setFav(true);
     // call the server action with userid and image id
-    // markFavoriteAction(userId, SF_ImageId);
-    console.log("userId=", favorite);
-
-    // let favorite = formData.get("favorite");
-    fav = true;
-    revalidatePath("/allQuestions");
+    markFavoriteAction(userId, SF_ImageId);
   };
 
   return (
@@ -45,7 +35,6 @@ const ImageClientComponent = ({ userId, SF_ImageId, url, favorite }) => {
       <form action={markFavorite}>
         <input type="hidden" name="userId" value={userId} />
         <input type="hidden" name="SF_ImageId" value={SF_ImageId} />
-        <input type="hidden" name="favorite" value={favorite} />
         {/* {!favorite ? ( */}
         {!fav ? (
           <button
