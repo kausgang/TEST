@@ -35,7 +35,7 @@ const ImageClientComponent = ({ userId, SF_ImageId, url, favorite }) => {
     // markFavoriteAction(userId, SF_ImageId);
     console.log("userId=", favorite);
 
-    // let favorite = formData.get("favorite");
+    let favorite = formData.get("favorite");
     fav = true;
     revalidatePath("/allQuestions");
   };
